@@ -38,6 +38,106 @@ package com.example.restservice;
 
 public record Greeting(long id, String content) { }
 ```
+<br />
+
+## Key Terms -- `GreetingController.java`
+
+### Import Statements
+| **Category**  | **Class/Annotation** | **Explanation**                                                                                                      |
+|---------------|----------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Imports**   | `AtomicLong`          | Provides a thread-safe way to handle long values with atomic operations.                                            |
+|               | `GetMapping`          | A Spring annotation used to map HTTP GET requests to a handler method.                                               |
+|               | `RequestParam`        | A Spring annotation used to extract query parameters from HTTP requests.                                             |
+|               | `RestController`      | A Spring annotation that marks a class as a controller where every method returns a domain object (usually JSON/XML). |
+
+<br />
+
+```java
+import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+```
+<br />
+
+### Class Declaration
+| **Category**                          | **Explanation**                                                                                  |
+|---------------------------------------|--------------------------------------------------------------------------------------------------|
+| `@RestController`                     | Marks the class as a controller for a RESTful web service. Methods in this class handle HTTP requests and return response bodies directly (often as JSON). |
+| `public class GreetingController`     | Declares the class `GreetingController`, which handles the greeting-related HTTP requests.       |
+
+<br />
+
+```java
+@RestController
+public class GreetingController {
+  ...
+}
+```
+
+<br />
+
+### Static Constant Declaration
+| Item              | Description                                                                                      |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| **Category**      | Field Declaration                                                                                 |
+| **Variable Name** | `template`                                                                                        |
+| **Type**          | `String`                                                                                          |
+| **Value**         | `"Hello, %s!"`                                                                                   |
+| **Explanation**   | Declares a static constant string used for formatting greeting messages.                         |
+| **Modifiers**     | `static` - Shared among all instances. <br> `final` - The value cannot be changed once initialized.|
+
+<br />
+
+```java
+private static final String template = "Hello, %s!";
+```
+
+<br />
+
+### Instance Variable Declaration
+| Category             | Description                                                                                                                                     |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Field Declaration    | Declares an instance variable `counter` of type `AtomicLong`.                                                                                   |
+| Initialization       | The `AtomicLong` is initialized using the default constructor, starting with a value of 0.                                                      |
+| Purpose              | Used to generate a unique ID for each greeting, with values incrementing in a thread-safe manner.                                                 |
+
+<br />
+
+```java
+private final AtomicLong counter = new AtomicLong();
+```
+
+<br />
+
+### Method Declaration
+| Category                        | Explanation                                                                                                                                              |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Method Definition and Annotation | @GetMapping("/greeting"): Maps HTTP GET requests to the /greeting URL path to the `greeting` method.                                                      |
+| Method Return Type               | public Greeting greeting(...): The method returns a `Greeting` object.                                                                                  |
+| Request Parameter Binding        | @RequestParam(value = "name", defaultValue = "World"): Binds the `name` parameter from the query string to the `name` method parameter. Default is "World".|
+
+<br />
+
+```java
+@GetMapping("/greeting")
+public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) { ... }
+```
+
+<br />
+
+### Method Body
+| **Method**                           | **Explanation**                                                                                                                                                                |
+|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `counter.incrementAndGet()`          | Increments the counter by 1 and returns the updated value, providing a unique ID for each greeting.                                                                             |
+| `String.format(template, name)`      | Formats the `template` string using the `name` parameter. For example, if `name` is "Alice", the result would be "Hello, Alice!".                                              |
+| `new Greeting(...)`                  | Creates a new `Greeting` object using the incremented counter and the formatted greeting string. Assumes the `Greeting` class has a constructor that accepts an ID and message. |
+
+<br />
+
+```java
+return new Greeting(counter.incrementAndGet(), String.format(template, name));
+```
 
 <br />
 
