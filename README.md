@@ -1,4 +1,5 @@
 ## SprintBoot_Greetings
+It define a simple Spring Boot RESTful web service that returns a personalized greeting message when a user accesses the ```/greeting``` endpoint.
 
 <br />
 
@@ -8,10 +9,40 @@
 | [http://localhost:8080/greeting](http://localhost:8080/greeting)             | Default greeting                  | <img width="362" alt="Screenshot 2024-12-03 at 4 55 04 PM" src="https://github.com/user-attachments/assets/29f0e865-7ae3-471a-ad70-ca9551041458"> |
 | [http://localhost:8080/greeting?name=Vivian](http://localhost:8080/greeting?name=Vivian) | Personalized greeting (`name=User`) | <img width="428" alt="Screenshot 2024-12-03 at 4 55 48 PM" src="https://github.com/user-attachments/assets/7e7eb5ef-1e75-48b7-9025-b3aff860509c"> |
 
+<br />
+
+## Key Terms -- `Greeting.java` ##
+
+`com.example.restservice`:
+| **Concept**         | **Description**                                                                 |
+|---------------------|---------------------------------------------------------------------------------|
+| Package Definition  | The line defines the package the class belongs to (`com.example.restservice`).   |
+| Purpose of Packages | Packages are used to organize classes in Java.                                  |
+| Directory Structure | The package name typically corresponds to the directory structure where the class file is stored. |
+
+<br />
+
+`public record Greeting(long id, String content) { }`:
+| Component               | Description                                                                                                                                         |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`public`**             | This is an access modifier, meaning the `Greeting` class can be accessed from any other class.                                                     |
+| **`record`**             | A special type of class in Java (introduced in Java 14). A record automatically generates useful methods (like constructor, `equals()`, `hashCode()`, and `toString()`) based on the fields. |
+| **`Greeting`**           | The name of the record, which functions as a class in Java.                                                                                        |
+| **`(long id, String content)`** | The fields (or components) of the record: `id` (of type `long`) and `content` (of type `String`). These represent the data the record holds. |
+| **`{ }`**                | The body of the record. In this case, it is empty, but the Java compiler automatically generates methods like constructor, `toString()`, `equals()`, and `hashCode()` based on the fields. |
+
+<br />
+
+```java
+package com.example.restservice;
+
+public record Greeting(long id, String content) { }
+```
 
 <br />
 
 ## Press the debug button to run
+
 ```
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
