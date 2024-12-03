@@ -2,6 +2,8 @@
 
 Link: https://start.spring.io/
 
+<br />
+
 | **Category**        | **Details**         |
 |---------------------|----------------------|
 | **Project**        | Maven                |
