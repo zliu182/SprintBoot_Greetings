@@ -141,6 +141,59 @@ return new Greeting(counter.incrementAndGet(), String.format(template, name));
 
 <br />
 
+## Key Terms -- `RestServiceApplication.java` ##
+
+### Imports 
+
+| **Category**         | **Description**                                                                                                                                              |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **SpringApplication** | A class that helps in launching a Spring Boot application.                                                                                                  |
+| **SpringBootApplication** | A special annotation that marks the main class of a Spring Boot application and enables various features like component scanning, autoconfiguration, and property support. |
+
+<br />
+
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+```
+
+<br />
+
+### Class Declaration
+
+| Component                       | Description                                                                                       |
+|----------------------------------|---------------------------------------------------------------------------------------------------|
+| `@SpringBootApplication`         | Annotation used to indicate a Spring Boot application. It enables:                                 |
+|                                  | - Component scanning (detecting beans and configurations).                                        |
+|                                  | - Auto-configuration (configuring beans automatically based on classpath and properties).         |
+|                                  | - Spring Boot's main configuration (e.g., running the application).                               |
+| `public class RestServiceApplication` | Declaration of the class that marks `RestServiceApplication` as the main entry point for the application. |
+
+<br />
+
+```java
+@SpringBootApplication
+public class RestServiceApplication { ... }
+```
+
+<br />
+
+### Running the Application
+
+| **Category**                     | **Description**                                                                                                                                               |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Spring Boot Application Runner** | This line starts the Spring Boot application by calling `SpringApplication.run()`.                                                                             |
+| **RestServiceApplication.class**  | The main class that serves as the configuration for the Spring Boot application.                                                                               |
+| **args**                          | Command-line arguments passed to the `main` method, which are forwarded to Spring Boot’s startup process.                                                      |
+
+<br />
+
+```java
+SpringApplication.run(RestServiceApplication.class, args);
+```
+
+<br />
+
 ## Press the debug button to run
 
 ```
